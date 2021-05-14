@@ -69,3 +69,5 @@ require (
 	k8s.io/api v0.21.0
 	k8s.io/apimachinery v0.21.0
 )
+
+replace github.com/containers/image/v5 => ../image
