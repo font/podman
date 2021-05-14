@@ -661,6 +661,17 @@ func (ir *ImageEngine) Sign(ctx context.Context, names []string, options entitie
 	}
 	return nil, nil
 }
+func (ir *ImageEngine) SigstoreSign(ctx context.Context, names []string, options entities.SigstoreSignOptions) (*entities.SignReport, error) {
+	mech, err := signature.NewSigstoreSigningMechanism()
+	if err != nil {
+		return nil, errors.Wrap(err, "error initializing sigstore")
+	}
+	defer mech.Close()
+	if err := mech.SupportsSigning(); err != nil {
+		return nil, errors.Wrap(err, "signing is not supported")
+	}
+	return nil, nil
+}
 
 func getSigFilename(sigStoreDirPath string) (string, error) {
 	sigFileSuffix := 1

@@ -39,4 +39,5 @@ type ImageEngine interface {
 	ManifestRemove(ctx context.Context, names []string) (string, error)
 	ManifestPush(ctx context.Context, name, destination string, imagePushOpts ImagePushOptions) (string, error)
 	Sign(ctx context.Context, names []string, options SignOptions) (*SignReport, error)
+	SigstoreSign(ctx context.Context, names []string, options SigstoreSignOptions) (*SignReport, error)
 }

@@ -345,6 +345,10 @@ type SignOptions struct {
 	All       bool
 }
 
+// SigstoreSignOptions describes input options for the CLI sigstore signing
+type SigstoreSignOptions struct {
+}
+
 // SignReport describes the result of signing
 type SignReport struct{}
 

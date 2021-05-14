@@ -364,3 +364,7 @@ func (ir *ImageEngine) Shutdown(_ context.Context) {
 func (ir *ImageEngine) Sign(ctx context.Context, names []string, options entities.SignOptions) (*entities.SignReport, error) {
 	return nil, errors.New("not implemented yet")
 }
+
+func (ir *ImageEngine) SigstoreSign(ctx context.Context, names []string, options entities.SigstoreSignOptions) (*entities.SignReport, error) {
+	return nil, errors.New("not implemented yet")
+}
