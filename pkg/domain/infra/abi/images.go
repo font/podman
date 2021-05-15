@@ -670,6 +670,50 @@ func (ir *ImageEngine) SigstoreSign(ctx context.Context, names []string, options
 	if err := mech.SupportsSigning(); err != nil {
 		return nil, errors.Wrap(err, "signing is not supported")
 	}
+	sc := ir.Libpod.SystemContext()
+	//sc.DockerCertPath = options.CertDir
+
+	for _, signImage := range names {
+		err := func() error {
+			srcRef, err := alltransports.ParseImageName(signImage)
+			if err != nil {
+				return errors.Wrapf(err, "error parsing image name")
+			}
+			rawSource, err := srcRef.NewImageSource(ctx, sc)
+			if err != nil {
+				return errors.Wrapf(err, "error getting image source")
+			}
+			defer func() {
+				if err = rawSource.Close(); err != nil {
+					logrus.Errorf("unable to close %s image source %q", srcRef.DockerReference().Name(), err)
+				}
+			}()
+			topManifestBlob, _, err := rawSource.GetManifest(ctx, nil)
+			if err != nil {
+				return errors.Wrapf(err, "error getting manifest blob")
+			}
+			dockerReference := rawSource.Reference().DockerReference()
+			if dockerReference == nil {
+				return errors.Errorf("cannot determine canonical Docker reference for destination %s", transports.ImageName(rawSource.Reference()))
+			}
+			manifestDigest, err := manifest.Digest(topManifestBlob)
+			if err != nil {
+				return err
+			}
+
+			if err := signature.SignManifest(ctx, manifestDigest, dockerReference.String(), mech); err != nil {
+				return errors.Wrapf(err, "error storing signature for %s, %v", dockerReference.String(), manifestDigest)
+			}
+
+			//if err = putSignature(topManifestBlob, mech, sigStoreDir, manifestDigest, dockerReference, options); err != nil {
+			//	return errors.Wrapf(err, "error storing signature for %s, %v", dockerReference.String(), manifestDigest)
+			//}
+			return nil
+		}()
+		if err != nil {
+			return nil, err
+		}
+	}
 	return nil, nil
 }
 
