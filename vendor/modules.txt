@@ -415,7 +415,7 @@ github.com/gogo/protobuf/gogoproto
 github.com/gogo/protobuf/proto
 github.com/gogo/protobuf/protoc-gen-gogo/descriptor
 github.com/gogo/protobuf/sortkeys
-# github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e
+# github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da
 github.com/golang/groupcache/lru
 # github.com/golang/protobuf v1.5.2
 github.com/golang/protobuf/proto
@@ -428,13 +428,13 @@ github.com/golang/snappy
 # github.com/google/certificate-transparency-go v1.1.1
 github.com/google/certificate-transparency-go/asn1
 github.com/google/certificate-transparency-go/tls
-# github.com/google/go-cmp v0.5.5
+# github.com/google/go-cmp v0.5.6
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/go-containerregistry v0.5.0
+# github.com/google/go-containerregistry v0.5.1
 github.com/google/go-containerregistry/internal/and
 github.com/google/go-containerregistry/internal/estargz
 github.com/google/go-containerregistry/internal/gzip
@@ -687,7 +687,7 @@ github.com/opentracing/opentracing-go/log
 # github.com/ostreedev/ostree-go v0.0.0-20190702140239-759a8c1ac913
 github.com/ostreedev/ostree-go/pkg/glibobject
 github.com/ostreedev/ostree-go/pkg/otbuiltin
-# github.com/pelletier/go-toml v1.9.0
+# github.com/pelletier/go-toml v1.9.1
 github.com/pelletier/go-toml
 # github.com/pierrec/lz4 v2.6.0+incompatible
 github.com/pierrec/lz4
@@ -745,9 +745,10 @@ github.com/sassoftware/relic/signers/sigerrors
 github.com/seccomp/libseccomp-golang
 # github.com/segmentio/ksuid v1.0.3
 github.com/segmentio/ksuid
-# github.com/sigstore/cosign v0.4.0
+# github.com/sigstore/cosign v0.4.1-0.20210528210847-0b839264a5a2
 github.com/sigstore/cosign/pkg/cosign
 github.com/sigstore/cosign/pkg/cosign/fulcio
+github.com/sigstore/cosign/pkg/cosign/remote
 # github.com/sigstore/fulcio v0.0.0-20210405115948-e7630f533fca
 github.com/sigstore/fulcio/cmd/client/app
 github.com/sigstore/fulcio/pkg/generated/client
@@ -755,7 +756,7 @@ github.com/sigstore/fulcio/pkg/generated/client/operations
 github.com/sigstore/fulcio/pkg/generated/models
 github.com/sigstore/fulcio/pkg/log
 github.com/sigstore/fulcio/pkg/oauthflow
-# github.com/sigstore/rekor v0.1.2-0.20210428010952-9e3e56d52dd0
+# github.com/sigstore/rekor v0.1.2-0.20210519014330-b5480728bde6
 github.com/sigstore/rekor/cmd/rekor-cli/app
 github.com/sigstore/rekor/cmd/rekor-cli/app/format
 github.com/sigstore/rekor/cmd/rekor-cli/app/state
@@ -781,13 +782,14 @@ github.com/sigstore/rekor/pkg/types/rpm
 github.com/sigstore/rekor/pkg/types/rpm/v0.0.1
 github.com/sigstore/rekor/pkg/util
 github.com/sigstore/rekor/pkg/verify
-# github.com/sigstore/sigstore v0.0.0-20210427115853-11e6eaab7cdc
+# github.com/sigstore/sigstore v0.0.0-20210522133621-faee93288971
 github.com/sigstore/sigstore/pkg/kms
 github.com/sigstore/sigstore/pkg/kms/gcp
 github.com/sigstore/sigstore/pkg/kms/hashivault
 github.com/sigstore/sigstore/pkg/oauthflow
 github.com/sigstore/sigstore/pkg/signature
 github.com/sigstore/sigstore/pkg/signature/payload
+github.com/sigstore/sigstore/pkg/tlog
 # github.com/sirupsen/logrus v1.8.1
 github.com/sirupsen/logrus
 github.com/sirupsen/logrus/hooks/syslog
@@ -858,7 +860,7 @@ github.com/zalando/go-keyring
 github.com/zalando/go-keyring/secret_service
 # go.etcd.io/bbolt v1.3.5
 go.etcd.io/bbolt
-# go.mongodb.org/mongo-driver v1.5.1
+# go.mongodb.org/mongo-driver v1.5.2
 go.mongodb.org/mongo-driver/bson
 go.mongodb.org/mongo-driver/bson/bsoncodec
 go.mongodb.org/mongo-driver/bson/bsonoptions
@@ -886,7 +888,7 @@ go.opencensus.io/trace/propagation
 go.opencensus.io/trace/tracestate
 # go.uber.org/atomic v1.7.0
 go.uber.org/atomic
-# go.uber.org/multierr v1.6.0
+# go.uber.org/multierr v1.7.0
 go.uber.org/multierr
 # go.uber.org/zap v1.16.0
 go.uber.org/zap
@@ -895,11 +897,12 @@ go.uber.org/zap/internal/bufferpool
 go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
+# golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
 golang.org/x/crypto/chacha20
 golang.org/x/crypto/curve25519
+golang.org/x/crypto/curve25519/internal/field
 golang.org/x/crypto/ed25519
 golang.org/x/crypto/ed25519/internal/edwards25519
 golang.org/x/crypto/internal/subtle
@@ -921,7 +924,7 @@ golang.org/x/crypto/ssh/agent
 golang.org/x/crypto/ssh/internal/bcrypt_pbkdf
 golang.org/x/crypto/ssh/knownhosts
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/net v0.0.0-20210428140749-89ef3d95e781
+# golang.org/x/net v0.0.0-20210521195947-fe42d452be8f
 golang.org/x/net/context
 golang.org/x/net/context/ctxhttp
 golang.org/x/net/html
@@ -935,8 +938,9 @@ golang.org/x/net/internal/socks
 golang.org/x/net/internal/timeseries
 golang.org/x/net/proxy
 golang.org/x/net/trace
-# golang.org/x/oauth2 v0.0.0-20210413134643-5e61552d6c78
+# golang.org/x/oauth2 v0.0.0-20210514164344-f6687ab2804c
 golang.org/x/oauth2
+golang.org/x/oauth2/authhandler
 golang.org/x/oauth2/google
 golang.org/x/oauth2/google/internal/externalaccount
 golang.org/x/oauth2/internal
@@ -945,14 +949,14 @@ golang.org/x/oauth2/jwt
 # golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 golang.org/x/sync/errgroup
 golang.org/x/sync/semaphore
-# golang.org/x/sys v0.0.0-20210426230700-d19ff857e887
+# golang.org/x/sys v0.0.0-20210521203332-0cec03c779c1
 golang.org/x/sys/cpu
 golang.org/x/sys/execabs
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/term v0.0.0-20210422114643-f5beecf764ed
+# golang.org/x/term v0.0.0-20210503060354-a79de5458b56
 golang.org/x/term
 # golang.org/x/text v0.3.6
 golang.org/x/text/encoding
@@ -978,9 +982,9 @@ golang.org/x/text/unicode/norm
 golang.org/x/text/width
 # golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
 golang.org/x/time/rate
-# golang.org/x/tools v0.1.0
+# golang.org/x/tools v0.1.2-0.20210512205948-8287d5da45e4
 golang.org/x/tools/go/ast/inspector
-# google.golang.org/api v0.44.0
+# google.golang.org/api v0.46.0
 google.golang.org/api/internal
 google.golang.org/api/internal/impersonate
 google.golang.org/api/iterator
@@ -1002,14 +1006,14 @@ google.golang.org/appengine/internal/socket
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/socket
 google.golang.org/appengine/urlfetch
-# google.golang.org/genproto v0.0.0-20210426193834-eac7f76ac494
+# google.golang.org/genproto v0.0.0-20210521181308-5ccab8a35a9a
 google.golang.org/genproto/googleapis/api/annotations
 google.golang.org/genproto/googleapis/cloud/kms/v1
 google.golang.org/genproto/googleapis/iam/v1
 google.golang.org/genproto/googleapis/rpc/status
 google.golang.org/genproto/googleapis/type/expr
 google.golang.org/genproto/protobuf/field_mask
-# google.golang.org/grpc v1.37.0
+# google.golang.org/grpc v1.38.0
 google.golang.org/grpc
 google.golang.org/grpc/attributes
 google.golang.org/grpc/backoff

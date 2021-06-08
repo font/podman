@@ -38,8 +38,8 @@ const (
 type deviceResp struct {
 	DeviceCode              string `json:"device_code"`
 	UserCode                string `json:"user_code"`
-	VerificationUri         string `json:"verification_uri"`
-	VerificationUriComplete string `json:"verification_uri_complete"`
+	VerificationURI         string `json:"verification_uri"`
+	VerificationURIComplete string `json:"verification_uri_complete"`
 	Interval                int    `json:"interval"`
 	ExpiresIn               int    `json:"expires_in"`
 }
@@ -87,9 +87,9 @@ func (d *DeviceFlowTokenGetter) deviceFlow(clientID string) (string, error) {
 	if err := json.Unmarshal(b, &parsed); err != nil {
 		return "", err
 	}
-	uri := parsed.VerificationUriComplete
+	uri := parsed.VerificationURIComplete
 	if uri == "" {
-		uri = parsed.VerificationUri
+		uri = parsed.VerificationURI
 	}
 	d.MessagePrinter(fmt.Sprintf("Enter the verification code %s in your browser at: %s", parsed.UserCode, uri))
 	d.MessagePrinter(fmt.Sprintf("Code will be valid for %d seconds", parsed.ExpiresIn))
@@ -135,7 +135,6 @@ func (d *DeviceFlowTokenGetter) deviceFlow(clientID string) (string, error) {
 }
 
 func (d *DeviceFlowTokenGetter) GetIDToken(p *oidc.Provider, cfg oauth2.Config) (*OIDCIDToken, error) {
-
 	idToken, err := d.deviceFlow(cfg.ClientID)
 	if err != nil {
 		return nil, err
@@ -146,12 +145,13 @@ func (d *DeviceFlowTokenGetter) GetIDToken(p *oidc.Provider, cfg oauth2.Config) 
 		return nil, err
 	}
 
-	if _, err := emailFromIdToken(parsedIDToken); err != nil {
+	email, err := emailFromIDToken(parsedIDToken)
+	if err != nil {
 		return nil, err
 	}
 
 	return &OIDCIDToken{
-		RawString:   idToken,
-		ParsedToken: parsedIDToken,
+		RawString: idToken,
+		Email:     email,
 	}, nil
 }
