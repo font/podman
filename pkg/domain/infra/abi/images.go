@@ -661,6 +661,7 @@ func (ir *ImageEngine) Sign(ctx context.Context, names []string, options entitie
 	}
 	return nil, nil
 }
+
 func (ir *ImageEngine) SigstoreSign(ctx context.Context, names []string, options entities.SigstoreSignOptions) (*entities.SignReport, error) {
 	mech, err := signature.NewSigstoreSigningMechanism()
 	if err != nil {
@@ -701,13 +702,35 @@ func (ir *ImageEngine) SigstoreSign(ctx context.Context, names []string, options
 				return err
 			}
 
-			if err := signature.SignManifest(ctx, manifestDigest, dockerReference.String(), mech); err != nil {
-				return errors.Wrapf(err, "error storing signature for %s, %v", dockerReference.String(), manifestDigest)
+			fmt.Println("Generating ephemeral keys...")
+			if err := mech.GenerateKeys(); err != nil {
+				return errors.Wrap(err, "getting key from Fulcio")
 			}
 
-			//if err = putSignature(topManifestBlob, mech, sigStoreDir, manifestDigest, dockerReference, options); err != nil {
-			//	return errors.Wrapf(err, "error storing signature for %s, %v", dockerReference.String(), manifestDigest)
-			//}
+			fmt.Println("Marshalling payload into JSON...")
+			sigPayload, err := signature.NewCosignSignature(manifestDigest, dockerReference.String()).MarshalJSON()
+			if err != nil {
+				return err
+			}
+
+			fmt.Println("Signing payload...")
+			sig, signed, err := mech.Sign(sigPayload)
+			if err != nil {
+				return errors.Wrapf(err, "error creating signature for %s, %v", dockerReference.String(), manifestDigest)
+			}
+
+			fmt.Println("Sending entry to transparency log")
+			tlogEntry, err := mech.Upload(signed, sig, sigPayload, signature.TLogServer())
+			if err != nil {
+				return errors.Wrapf(err, "error uploading entry to transparency log for %s", dockerReference.String())
+			}
+			fmt.Println("Rekor entry successful. Index number: ", tlogEntry)
+
+			fmt.Println("manifestDigest", manifestDigest, "dockerReference", dockerReference.String())
+			signature.SignatureImageTagForDigest(string(manifestDigest))
+
+			// find out how to do the same and append a layer with annotations.
+
 			return nil
 		}()
 		if err != nil {
