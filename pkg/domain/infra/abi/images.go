@@ -727,10 +727,22 @@ func (ir *ImageEngine) SigstoreSign(ctx context.Context, names []string, options
 			fmt.Println("Rekor entry successful. Index number: ", tlogEntry)
 
 			fmt.Println("manifestDigest", manifestDigest, "dockerReference", dockerReference.String())
-			signature.SignatureImageTagForDigest(string(manifestDigest))
+			sigImgTag := signature.SignatureImageTagForDigest(string(manifestDigest))
 
-			// find out how to do the same and append a layer with annotations.
+			fmt.Println("Creating digest reference using srcref", srcRef.DockerReference(), "digest", sigImgTag)
+			sigImg, err := reference.WithTag(srcRef.DockerReference(), sigImgTag)
+			if err != nil {
+				return errors.Wrapf(err, "error creating signature image reference")
+			}
 
+			fmt.Println("Parsing image name", sigImg.String())
+			dstRef, err := alltransports.ParseImageName("docker://" + sigImg.String())
+			if err != nil {
+				return errors.Wrapf(err, "error parsing image name")
+			}
+
+			fmt.Println("Pushing signature to:", dstRef.DockerReference().String())
+			// Compose image with appended layer of annotations.
 			return nil
 		}()
 		if err != nil {
